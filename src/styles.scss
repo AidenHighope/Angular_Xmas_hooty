@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../src/app/shared/styles/colors.scss";
+
+body {
+  background-image: url("assets/christmas-background-with-snow-bokeh-lights.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}
+nav {
+  background-color: $vertOlive;
+}
+
+.main-container {
+  margin: 1%;
+  padding: 1%;
+  background-color: rgba(239, 209, 165, 0.6);
+  border-radius: 5px;
+}
+
+.speech-bubble {
+  margin: 1%;
+  padding: 1%;
+  border-radius: inherit;
+  border: 3px dashed $vertOlive;
+  background-color: white;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: $vertOlive;
+}
+
+li {
+  list-style: none;
+  display: inline;
+}
+
+.btn-success {
+  background-color: $vertOlive;
+}
+.btn-success:hover {
+  background-color: $vertSapin;
+}
+
+.btn-danger {
+  background-color: $rougeNoel;
+}
+.btn-danger:hover {
+  background-color: $rougeBordeau;
+}
+
+.panier {
+  right: 0;
+  margin-left: 10%;
+}

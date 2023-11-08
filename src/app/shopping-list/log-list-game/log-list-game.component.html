@@ -1,0 +1,31 @@
+<div class="main-container">
+  <div class="speech-bubble">
+    <div class="row">
+      <div class="col">
+        <h2>Faisons une bûche !</h2>
+        <p>
+          nous allons faire une belle bûche, hoot hoot! mais je ne sais pas de
+          quoi nous avons besoin...
+        </p>
+        <label for="listInput">Que veux-tu ajouter ?</label>
+        <input type="text" id="listInput" [(ngModel)]="userInput" />
+        <button class="btn btn-success" (click)="addNew(userInput)">
+          ajouter
+        </button>
+      </div>
+      <div class="col">
+        <h2 class="text-center">La liste</h2>
+        <ul>
+          <li *ngFor="let food of ingredientList; let i = index">
+            <button class="btn btn-danger" (click)="addOne(i)">+</button>
+            {{ food.nb }}
+            <button class="btn btn-danger" (click)="removeOne(i)">-</button>
+            {{ food.name | lowercase }}
+
+            <button class="btn btn-danger panier">panier !</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

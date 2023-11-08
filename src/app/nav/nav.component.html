@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark">
+  <ul>
+    <li *ngFor="let link of links" (mouseleave)="clearLink()">
+      <a class="navbar-brand" *ngIf="link.url" [routerLink]="link.url">{{
+        link.title
+      }}</a>
+      <a
+        class="navbar-brand"
+        *ngIf="!link.url"
+        (mouseover)="toggleLink(link)"
+        [ngClass]="{ active: link.isVisible }"
+        >{{ link.title }}</a
+      >
+      <ul *ngIf="link.children && link.isVisible" class="dropDown">
+        <li *ngFor="let child of link.children">
+          <a [routerLink]="child.url">{{ child.title }}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
