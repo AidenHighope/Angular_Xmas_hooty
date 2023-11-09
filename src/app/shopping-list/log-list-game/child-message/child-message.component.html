@@ -1,0 +1,40 @@
+<div [class.notShowing]="!validity" [class.show]="validity">
+  <div class="main-container">
+    <div class="speech-bubble">
+      <div class="row">
+        <div class="col">
+          <p class="text-justify">
+            Bravo aventurier de la bûche! Donc j'ai besoin de :
+          </p>
+          <ul>
+            <li *ngFor="let food of cartList">
+              x{{ food.nb }} {{ food.name }}
+            </li>
+          </ul>
+          <p>
+            Boubou est très fier! maintenant nous allons ajouter à cette
+            délicieuse bûche quelques ingrédients que j'ai emprunté à Loulou
+          </p>
+          <ul>
+            <li>des éclats de rire elfique</li>
+            <li>une pincée de magie étincelante</li>
+            <li>du sang de pomme</li>
+          </ul>
+          <p>
+            Le sang de pomme est I.N.D.I.S.P.E.N.S.A.B.L.E !! Tu veux savoir
+            pourquoi ?
+          </p>
+          <button class="btn btn-success" (click)="hootySecret()">
+            Oh oui!!!
+          </button>
+          <button class="btn btn-danger" (click)="hootySecret()">
+            Je te le dirai quand même hoot !
+          </button>
+        </div>
+        <div class="col">
+          <img src="../../../../assets/hooty.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,13 +8,13 @@ import { Component } from '@angular/core';
 export class LogListGameComponent {
   //variables
   userInput: string = '';
-  ingredientList: { nb: number; name: string }[] = [];
-  IsInBasket: boolean = false;
-
+  ingredientList: { nb: number; name: string; isInBasket: boolean }[] = [];
+  IsValid: boolean = false;
+  secretMessage: string = '';
   //fonctions
   addNew(nameInput: string): void {
     nameInput = this.userInput;
-    let newIngredient = { nb: 1, name: nameInput };
+    let newIngredient = { nb: 1, name: nameInput, isInBasket: false };
     const exist = this.ingredientList.find(
       (ingredient) =>
         ingredient.name.trim().toLowerCase() === nameInput.toLowerCase()
@@ -27,6 +27,7 @@ export class LogListGameComponent {
       this.ingredientList.push(newIngredient);
       this.userInput = '';
     }
+    this.toggleValidity();
   }
   addOne(id: number): void {
     this.ingredientList[id].nb++;
@@ -36,11 +37,26 @@ export class LogListGameComponent {
     if (this.ingredientList[id].nb === 0) {
       this.ingredientList.splice(id, 1);
     }
+    this.toggleValidity();
   }
 
-  crossOff(): void {
-    if (this.ingredientList.length === 3) {
-      console.log('my first word was hoot');
+  toggleBasket(id: number): void {
+    this.ingredientList[id].isInBasket = !this.ingredientList[id].isInBasket;
+    this.toggleValidity();
+  }
+
+  toggleValidity(): void {
+    if (
+      this.ingredientList.length >= 4 &&
+      this.ingredientList.every((i) => i.isInBasket === true)
+    ) {
+      this.IsValid = true;
+    } else {
+      this.IsValid = false;
     }
+  }
+
+  addMessage(message: string) {
+    this.secretMessage = message;
   }
 }

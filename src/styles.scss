@@ -2,6 +2,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "../src/app/shared/styles/colors.scss";
 
+//global
+
 body {
   background-image: url("assets/christmas-background-with-snow-bokeh-lights.jpg");
   background-repeat: no-repeat;
@@ -39,6 +41,19 @@ li {
   display: inline;
 }
 
+//button
+
+input[type="text"] {
+  margin-left: 1%;
+  border: 2px solid $vertOlive;
+  border-radius: 4px;
+}
+input[type="text"]:focus {
+  outline: none;
+  border-color: $vertSapin;
+  box-shadow: 0 0 2px $vertOlive;
+}
+
 .btn-success {
   background-color: $vertOlive;
 }
@@ -56,4 +71,13 @@ li {
 .panier {
   right: 0;
   margin-left: 10%;
+}
+
+//shared class
+.notShowing {
+  display: none;
+}
+
+.show {
+  display: block;
 }
