@@ -1,1 +1,53 @@
-<p>game works!</p>
+<section class="main-container show">
+  <article class="speech-bubble">
+    <h2>Règles du jeu</h2>
+    <p>
+      Hoot-hoot ! Bienvenue au jeu des paires, l'aventure la plus palpitante de
+      la maison ! Et je ne dis pas ça parce que c'est moi qui l'ai fait
+      hoot-hoot! Non non, je suis un juge impartial hou! Voici comment tu peux
+      devenir le maître des paires magiques :
+    </p>
+    <ol>
+      <li>Entrez vos noms vaillants explorateurs!</li>
+      <li>
+        Appuyez sur "Start" pour lancer l'aventure. Le premier joueur commence
+        la quête.
+      </li>
+      <li>
+        Cliquez sur une carte pour la retourner et révéler la magie qu'elle
+        cache.
+      </li>
+      <li>
+        Gardez les yeux bien ouverts et mémorisez où se cachent les jumelles.
+      </li>
+      <li>
+        Trouvez toutes les paires avec le moins de tentatives possible. La
+        vitesse et la magie sont vos alliées !
+      </li>
+    </ol>
+    <button class="btn btn-success"></button>
+  </article>
+</section>
+
+<section class="main-container">
+  <article class="speech-bubble">
+    <div class="card-container">
+      <div *ngFor="let card of cards" (click)="flipCard(card)">
+        <img *ngIf="card.isFlipped" src="{{ card.identity }}" />
+        <img
+          *ngIf="!card.isFlipped"
+          src="card.identity = ../../../assets/card-game/cardIdentity.png"
+        />
+      </div>
+    </div>
+    <div class="MyButton">
+      <button class="btn btn-danger" (click)="Restart()">Restart</button>
+    </div>
+  </article>
+</section>
+
+<section class="main-container show">
+  <article class="speech-bubble">
+    <h2>Tableau des scores</h2>
+  </article>
+</section>

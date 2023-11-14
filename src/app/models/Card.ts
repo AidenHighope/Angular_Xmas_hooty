@@ -1,4 +1,5 @@
 export interface Cards {
-  Type: string;
-  isVisible: boolean;
+  id: number;
+  identity: string;
+  isFlipped: boolean;
 }

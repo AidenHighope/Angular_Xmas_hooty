@@ -1,0 +1,34 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.flipped {
+  height: 100px;
+  width: 100px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+.MyButton {
+  display: flex;
+  margin-top: 1%;
+  align-content: center;
+  justify-content: center;
+}

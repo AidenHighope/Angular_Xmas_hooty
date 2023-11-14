@@ -1,5 +1,5 @@
-<div class="main-container">
-  <div class="speech-bubble">
+<section class="main-container">
+  <article class="speech-bubble">
     <div class="row">
       <div class="col">
         <h2>Faisons une bûche !</h2>
@@ -55,8 +55,8 @@
         {{ secretMessage }}
       </h1>
     </div>
-  </div>
-</div>
+  </article>
+</section>
 <app-child-message
   (secretEvent)="addMessage($event)"
   [validity]="IsValid"

@@ -33,12 +33,12 @@ footer {
   position: fixed;
   width: 100%;
   bottom: 0;
+  margin-top: 2%;
   background-color: $vertOlive;
 }
-
-li {
-  list-style: none;
-  display: inline;
+.footer {
+  margin-top: 5%;
+  bottom: 0;
 }
 
 //button
