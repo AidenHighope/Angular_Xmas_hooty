@@ -9,10 +9,25 @@ import { Player } from 'src/app/models/Player';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-  //------------ variables/declaration --------------
+  //#region GLOBAL
+  //------------ variables/declaration global --------------
+  isVisible: boolean = true;
+  //------------ methodes/global logique --------------
+
+  toggleIsVisible(): void {
+    this.isVisible = !this.isVisible;
+  }
+  //#endregion
+
+  //#region GAME LOGIC
+  //------------ variables/declaration game --------------
   constructor(private cardService: CardService) {}
 
   userInput: string = '';
+
+  goodToGo: boolean = false;
+
+  nextTurn: boolean = false;
 
   flippedCards: Cards[] = [];
 
@@ -24,16 +39,16 @@ export class GameComponent {
     return this.cardService.players;
   }
 
-  get index(): number {
-    return this.cardService.currentPlayerIndex;
+  index: number = 0;
+
+  //------------ methodes/game logique --------------
+  addNewPlayer(input: string): void {
+    let newPlayer = { name: input, score: 0 };
+    this.players.push(newPlayer);
   }
 
-  //------------ methodes/logique --------------
-
-  setPlayerName(input: string): void {
-    let i = 0;
-    this.players[i].name = input;
-    i;
+  toggleGTG(): void {
+    this.goodToGo = true;
   }
 
   flipCard(card: Cards): void {
@@ -48,15 +63,20 @@ export class GameComponent {
   }
 
   private checkMatch(): void {
+    let currentPlayer = this.players[this.index];
     if (this.cardService.checkMatch(this.flippedCards)) {
-      // Handle matched cards (e.g., update score)
-      console.log('Match!');
+      currentPlayer.score += 15;
     } else {
-      // Flip back unmatched cards
+      if (currentPlayer.score > 0) {
+        currentPlayer.score -= 5;
+      } else if (currentPlayer.score < 0) {
+        currentPlayer.score = 0;
+      }
       this.flippedCards.forEach((card) => this.cardService.flipCard(card));
-      console.log('Not a match!');
     }
-
+    if (this.cards.every((card) => card.isFlipped)) {
+      this.nextTurn = true;
+    }
     this.flippedCards = [];
   }
 
@@ -65,5 +85,8 @@ export class GameComponent {
     this.cards.forEach((card) => {
       card.isFlipped = false;
     });
+    this.index++;
+    this.nextTurn = false;
   }
+  //#endregion
 }

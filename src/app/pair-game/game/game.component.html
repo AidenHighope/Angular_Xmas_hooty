@@ -1,35 +1,80 @@
-<section class="main-container show">
+<section class="main-container" [class.notShowing]="goodToGo">
   <article class="speech-bubble">
-    <h2>Règles du jeu</h2>
-    <p>
-      Hoot-hoot ! Bienvenue au jeu des paires, l'aventure la plus palpitante de
-      la maison ! Et je ne dis pas ça parce que c'est moi qui l'ai fait
-      hoot-hoot! Non non, je suis un juge impartial hou! Voici comment tu peux
-      devenir le maître des paires magiques :
-    </p>
-    <ol>
-      <li>Entrez vos noms vaillants explorateurs!</li>
-      <li>
-        Appuyez sur "Start" pour lancer l'aventure. Le premier joueur commence
-        la quête.
-      </li>
-      <li>
-        Cliquez sur une carte pour la retourner et révéler la magie qu'elle
-        cache.
-      </li>
-      <li>
-        Gardez les yeux bien ouverts et mémorisez où se cachent les jumelles.
-      </li>
-      <li>
-        Trouvez toutes les paires avec le moins de tentatives possible. La
-        vitesse et la magie sont vos alliées !
-      </li>
-    </ol>
-    <button class="btn btn-success"></button>
+    <div id="pg1" [class.show]="isVisible" [class.notShowing]="!isVisible">
+      <h2>Règles du jeu</h2>
+      <p>
+        Hoot-hoot ! Bienvenue au jeu des paires, l'aventure la plus palpitante
+        de la maison ! Et je ne dis pas ça parce que c'est moi qui l'ai fait
+        hoot-hoot! Non non, je suis un juge impartial hou! Voici comment tu peux
+        devenir le maître des paires magiques :
+      </p>
+      <ol>
+        <li>Entrez vos noms vaillants explorateurs!</li>
+        <li>
+          Appuyez sur "Start" pour lancer l'aventure. Le premier joueur commence
+          la quête.
+        </li>
+        <li>
+          Cliquez sur une carte pour la retourner et révéler la magie qu'elle
+          cache.
+        </li>
+        <li>
+          Gardez les yeux bien ouverts et mémorisez où se cachent les jumelles.
+        </li>
+        <li>
+          Trouvez toutes les paires avec le moins de tentatives possible. La
+          vitesse et la magie sont vos alliées !
+        </li>
+      </ol>
+    </div>
+    <div id="pg2" [class.show]="!isVisible" [class.notShowing]="isVisible">
+      <h2>Inscriptions - minimum 2 participants !!</h2>
+      <p>
+        Entrez ici vos noms ! Seulement pour ceux qui sont assez braves pour
+        participer !
+      </p>
+      <label for="temp">Nom de l'aventurier</label>
+      <input type="text" id="temp" [(ngModel)]="userInput" />
+      <button class="btn btn-danger" (click)="addNewPlayer(userInput)">
+        Inscrire
+      </button>
+      <hr />
+      <h3>Participants</h3>
+      <ol>
+        <li *ngFor="let player of players">{{ player.name | titlecase }}</li>
+      </ol>
+      <button
+        class="btn btn-danger"
+        [disabled]="players.length < 2"
+        (click)="toggleGTG()"
+      >
+        Fin des inscriptions !
+      </button>
+    </div>
+
+    <div class="MyButton">
+      <button
+        class="btn btn-success"
+        (click)="toggleIsVisible()"
+        [disabled]="isVisible"
+      >
+        <span class="material-symbols-outlined"> arrow_back_ios_new </span>
+      </button>
+      <button
+        class="btn btn-success"
+        (click)="toggleIsVisible()"
+        [disabled]="!isVisible"
+      >
+        <span class="material-symbols-outlined"> arrow_forward_ios </span>
+      </button>
+    </div>
   </article>
 </section>
 
-<section class="main-container">
+<section class="main-container" [class.notShowing]="!goodToGo">
+  <article class="speech-bubble">
+    <h3>Tour du joueur : {{ players[index].name | titlecase }}</h3>
+  </article>
   <article class="speech-bubble">
     <div class="card-container">
       <div *ngFor="let card of cards" (click)="flipCard(card)">
@@ -41,7 +86,9 @@
       </div>
     </div>
     <div class="MyButton">
-      <button class="btn btn-danger" (click)="Restart()">Restart</button>
+      <button class="btn btn-danger" (click)="Restart()" [disabled]="!nextTurn">
+        Next Player
+      </button>
     </div>
   </article>
 </section>
@@ -49,5 +96,10 @@
 <section class="main-container show">
   <article class="speech-bubble">
     <h2>Tableau des scores</h2>
+    <ol>
+      <li *ngFor="let player of players">
+        {{ player.name | titlecase }} - {{ player.score }} points
+      </li>
+    </ol>
   </article>
 </section>

@@ -7,7 +7,6 @@ import { Player } from 'src/app/models/Player';
 export class CardService {
   cards: Cards[] = [];
   players: Player[] = [];
-  currentPlayerIndex: number = 0;
   constructor() {
     this.initializeCards();
   }
