@@ -71,7 +71,8 @@
   </article>
 </section>
 
-<section class="main-container" [class.notShowing]="!goodToGo">
+<!--//TODO:reactiver section-->
+<!-- <section class="main-container" [class.notShowing]="!goodToGo">
   <article class="speech-bubble">
     <h3>Tour du joueur : {{ players[index].name | titlecase }}</h3>
   </article>
@@ -91,15 +92,18 @@
       </button>
     </div>
   </article>
-</section>
+</section> -->
 
-<section class="main-container show">
+<!--//TODO:remplacer testplayers-->
+<app-scoreboard-popup [scorePlayers]="sortedPlayers"></app-scoreboard-popup>
+
+<!-- <section class="main-container show">
   <article class="speech-bubble">
     <h2>Tableau des scores</h2>
     <ol>
-      <li *ngFor="let player of players">
+      <li *ngFor="let player of testPlayers">
         {{ player.name | titlecase }} - {{ player.score }} points
       </li>
     </ol>
   </article>
-</section>
+</section> -->

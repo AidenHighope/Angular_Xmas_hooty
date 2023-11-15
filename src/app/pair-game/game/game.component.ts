@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Cards } from 'src/app/models/Card';
 import { CardService } from 'src/app/shared/services/card.service';
 import { Player } from 'src/app/models/Player';
@@ -17,6 +17,18 @@ export class GameComponent {
   toggleIsVisible(): void {
     this.isVisible = !this.isVisible;
   }
+  //#endregion
+
+  //#region TESTING
+  //TODO enlever la region testing
+  testPlayers: Player[] = [
+    { name: 'Eda', score: 1000 },
+    { name: 'King', score: 200 },
+    { name: 'Hooty', score: 9999 },
+    { name: 'Camilla', score: 10 },
+  ];
+
+  sortedPlayers = this.testPlayers.slice().sort((a, b) => b.score - a.score);
   //#endregion
 
   //#region GAME LOGIC
