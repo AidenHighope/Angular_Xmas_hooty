@@ -45,7 +45,7 @@
       </ol>
       <button
         class="btn btn-danger"
-        [disabled]="players.length < 2"
+        [disabled]="players.length < 1"
         (click)="toggleGTG()"
       >
         Fin des inscriptions !
@@ -71,10 +71,9 @@
   </article>
 </section>
 
-<!--//TODO:reactiver section-->
-<!-- <section class="main-container" [class.notShowing]="!goodToGo">
+<section class="main-container" [class.notShowing]="!goodToGo">
   <article class="speech-bubble">
-    <h3>Tour du joueur : {{ players[index].name | titlecase }}</h3>
+    <!-- <h3>Tour du joueur : {{ players[index].name | titlecase }}</h3> -->
   </article>
   <article class="speech-bubble">
     <div class="card-container">
@@ -88,14 +87,23 @@
     </div>
     <div class="MyButton">
       <button class="btn btn-danger" (click)="Restart()" [disabled]="!nextTurn">
-        Next Player
+        Au suivant!
+      </button>
+      <button
+        class="btn btn-danger"
+        (click)="togglePopup()"
+        [disabled]="index < players.length"
+      >
+        Afficher score
       </button>
     </div>
   </article>
-</section> -->
+</section>
 
-<!--//TODO:remplacer testplayers-->
-<app-scoreboard-popup [scorePlayers]="sortedPlayers"></app-scoreboard-popup>
+<app-scoreboard-popup
+  [scorePlayers]="sortedPlayers"
+  [class.notShowing]="popup"
+></app-scoreboard-popup>
 
 <!-- <section class="main-container show">
   <article class="speech-bubble">

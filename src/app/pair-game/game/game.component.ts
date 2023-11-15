@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { Cards } from 'src/app/models/Card';
 import { CardService } from 'src/app/shared/services/card.service';
 import { Player } from 'src/app/models/Player';
+import { PopupService } from 'src/app/shared/services/popup.service';
 
 @Component({
   selector: 'app-game',
@@ -9,31 +11,25 @@ import { Player } from 'src/app/models/Player';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
+  constructor(private cardService: CardService) {}
   //#region GLOBAL
   //------------ variables/declaration global --------------
   isVisible: boolean = true;
+  popup: boolean = true;
   //------------ methodes/global logique --------------
 
   toggleIsVisible(): void {
     this.isVisible = !this.isVisible;
   }
-  //#endregion
 
-  //#region TESTING
-  //TODO enlever la region testing
-  testPlayers: Player[] = [
-    { name: 'Eda', score: 1000 },
-    { name: 'King', score: 200 },
-    { name: 'Hooty', score: 9999 },
-    { name: 'Camilla', score: 10 },
-  ];
-
-  sortedPlayers = this.testPlayers.slice().sort((a, b) => b.score - a.score);
+  togglePopup(): void {
+    this.popup = !this.popup;
+  }
   //#endregion
 
   //#region GAME LOGIC
   //------------ variables/declaration game --------------
-  constructor(private cardService: CardService) {}
+  buttonRestartTxt: string = 'au suivant !';
 
   userInput: string = '';
 
@@ -51,11 +47,13 @@ export class GameComponent {
     return this.cardService.players;
   }
 
+  sortedPlayers = this.players.slice().sort((a, b) => b.score - a.score);
   index: number = 0;
+  turncount: number = this.players.length;
 
   //------------ methodes/game logique --------------
   addNewPlayer(input: string): void {
-    let newPlayer = { name: input, score: 0 };
+    let newPlayer = { name: input, score: 0, isPlaying: true };
     this.players.push(newPlayer);
   }
 
@@ -88,16 +86,36 @@ export class GameComponent {
     }
     if (this.cards.every((card) => card.isFlipped)) {
       this.nextTurn = true;
+      console.log(
+        this.players[this.index] +
+          ' ' +
+          this.players[this.index].name +
+          ' ' +
+          this.players[this.index].score
+      );
+      console.log('all cards down index ' + this.index);
+      console.log('all cards down turncount ' + this.turncount);
+      console.log('all cards down length ' + this.players.length);
     }
     this.flippedCards = [];
   }
-
+  //TODO remove console log
   Restart(): void {
+    if (this.index >= this.players.length) {
+      this.index -= 1;
+      console.log('restart if ' + this.index);
+      console.log('restart if ' + this.turncount);
+      console.log('restart if ' + this.players.length);
+    } else {
+      this.index++;
+      console.log('restart else index ' + this.index);
+      console.log('restart else turncount ' + this.turncount);
+      console.log('restart else length ' + this.players.length);
+    }
     this.cardService.shuffle(this.cards);
     this.cards.forEach((card) => {
       card.isFlipped = false;
     });
-    this.index++;
     this.nextTurn = false;
   }
   //#endregion

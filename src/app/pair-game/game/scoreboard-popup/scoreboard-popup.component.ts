@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Player } from 'src/app/models/Player';
 
 @Component({
@@ -7,9 +7,5 @@ import { Player } from 'src/app/models/Player';
   styleUrls: ['./scoreboard-popup.component.scss'],
 })
 export class ScoreboardPopupComponent {
-  constructor(private cdr: ChangeDetectorRef) {}
-  triggerChangeDetection() {
-    this.cdr.detectChanges();
-  }
   @Input() scorePlayers: Player[] = [];
 }
