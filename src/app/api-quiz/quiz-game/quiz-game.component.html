@@ -1,0 +1,12 @@
+<section class="main-container">
+  <article class="speech-bubble">
+    <ul>
+      <button class="btn btn-danger" (click)="updateQuizList(1)">
+        musique
+      </button>
+      <li *ngFor="let question of questionList.quizzes">
+        {{ question.question }}
+      </li>
+    </ul>
+  </article>
+</section>

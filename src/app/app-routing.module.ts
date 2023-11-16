@@ -6,6 +6,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
+    path: 'api-quiz',
+    loadChildren: () =>
+      import('./api-quiz/api-quiz.module').then((m) => m.ApiQuizModule),
+  },
+  {
     path: 'shopping-list',
     loadChildren: () =>
       import('./shopping-list/shopping-list.module').then(

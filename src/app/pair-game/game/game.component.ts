@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
 import { Cards } from 'src/app/models/Card';
 import { CardService } from 'src/app/shared/services/card.service';
 import { Player } from 'src/app/models/Player';
 import { PopupService } from 'src/app/shared/services/popup.service';
+
+//TODO faire des constructeurs plus beaux
 
 @Component({
   selector: 'app-game',

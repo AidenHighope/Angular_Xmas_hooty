@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
       { title: 'Home', url: '/home' },
       { title: 'Jeux des paires', url: 'pair-game' },
       { title: 'La bûche', url: 'shopping-list' },
+      { title: 'Le quiz', url: 'api-quiz' },
     ];
   }
   toggleLink(link: Link): void {
