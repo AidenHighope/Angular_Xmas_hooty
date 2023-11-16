@@ -58,7 +58,6 @@ export class CardService {
   }
 
   checkMatch(cards: Cards[]): boolean {
-    // Implement logic to check if the flipped cards match
     return cards.every((card) => card.identity === cards[0].identity);
   }
 }

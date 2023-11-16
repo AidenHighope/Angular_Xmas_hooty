@@ -73,7 +73,7 @@
 
 <section class="main-container" [class.notShowing]="!goodToGo">
   <article class="speech-bubble">
-    <!-- <h3>Tour du joueur : {{ players[index].name | titlecase }}</h3> -->
+    <h3>Tour du joueur : {{ defaultName | titlecase }}</h3>
   </article>
   <article class="speech-bubble">
     <div class="card-container">
@@ -86,13 +86,17 @@
       </div>
     </div>
     <div class="MyButton">
-      <button class="btn btn-danger" (click)="Restart()" [disabled]="!nextTurn">
-        Au suivant!
+      <button
+        class="btn btn-danger"
+        (click)="Restart()"
+        [disabled]="!nextTurn || index + 1 === players.length"
+      >
+        au suivant!
       </button>
       <button
         class="btn btn-danger"
-        (click)="togglePopup()"
-        [disabled]="index < players.length"
+        (click)="sortScore()"
+        [disabled]="index + 1 < players.length || !nextTurn"
       >
         Afficher score
       </button>
@@ -102,8 +106,9 @@
 
 <app-scoreboard-popup
   [scorePlayers]="sortedPlayers"
-  [class.notShowing]="popup"
-></app-scoreboard-popup>
+  *ngIf="popupService.popupState$ | async"
+>
+</app-scoreboard-popup>
 
 <!-- <section class="main-container show">
   <article class="speech-bubble">
