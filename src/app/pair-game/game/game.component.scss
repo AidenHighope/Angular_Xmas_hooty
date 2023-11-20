@@ -1,11 +1,13 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  //justify-content: space-evenly;
   gap: 10px;
+  margin: auto;
 }
 
 img {
+  flex: 1 0 24%;
   width: 100px;
   height: 100px;
   cursor: pointer;
