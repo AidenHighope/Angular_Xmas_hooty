@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Quiz, RootObject } from 'src/app/models/Api';
+import { OneQuestionRoot, Quiz, RootObject } from 'src/app/models/Api';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,8 @@ export class QuizApiService {
 
   GetQuizzes(url: string): Observable<Quiz[]> {
     return this._http.get<Quiz[]>(url);
+  }
+  GetOneQuiz(url: string): Observable<OneQuestionRoot> {
+    return this._http.get<OneQuestionRoot>(url);
   }
 }

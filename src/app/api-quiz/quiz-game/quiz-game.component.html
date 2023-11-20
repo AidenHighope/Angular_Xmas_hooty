@@ -1,12 +1,74 @@
-<section class="main-container">
+<section class="main-container" *ngIf="GameRules.gameRuleState$ | async">
   <article class="speech-bubble">
+    <p>insérer ici règles du jeux</p>
+    <hr />
+    <label for="field">Nommer 2 équipes</label>
+    <input type="text" id="field" [(ngModel)]="userInput" />
+    <button
+      (click)="addTeam(userInput)"
+      class="btn btn-danger"
+      [disabled]="teams.length === 2"
+    >
+      inscription</button
+    ><br />
+    <button
+      class="btn btn-danger"
+      (click)="closeRules()"
+      [disabled]="teams.length < 2"
+    >
+      Commencer le quiz !
+    </button>
     <ul>
-      <button class="btn btn-danger" (click)="updateQuizList(1)">
-        musique
-      </button>
-      <li *ngFor="let question of questionList.quizzes">
-        {{ question.question }}
+      <li *ngFor="let item of teams">
+        {{ item.name }}
       </li>
     </ul>
   </article>
 </section>
+
+<section
+  class="main-container"
+  [class.notShowing]="!displayGame"
+  [class.show]="displayGame"
+>
+  <article class="speech-bubble">
+    <h3>
+      Tour du l'équipe : {{ updatePlayer()?.name ?? "default" | titlecase }}
+    </h3>
+  </article>
+  <article class="speech-bubble">
+    <p class="lead">
+      {{ currentQuestion.quiz.question }}
+    </p>
+    <ul class="quiz">
+      <li *ngFor="let answer of shuffledAnswers">
+        <button
+          class="btn btn-success answer"
+          (click)="checkScore(answer)"
+          [disabled]="nextQ"
+          [class.isCorrect]="
+            isCorrect && answer === currentQuestion.quiz.answer
+          "
+        >
+          {{ answer }}
+        </button>
+      </li>
+    </ul>
+    <button class="btn btn-danger" (click)="nextQuestion()" [disabled]="!nextQ">
+      next
+    </button>
+    <button
+      class="btn btn-danger"
+      (click)="sortTeamsScore()"
+      [disabled]="startIndex != 20"
+    >
+      tableau des scores
+    </button>
+  </article>
+</section>
+
+<app-scoreboard
+  *ngIf="popupService.popupState$ | async"
+  [scorePlayers]="sortedTeams"
+>
+</app-scoreboard>

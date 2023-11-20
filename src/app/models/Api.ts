@@ -11,3 +11,8 @@ export interface Quiz {
   category: string;
   difficulty: string;
 }
+
+export interface OneQuestionRoot {
+  msg: string;
+  quiz: Quiz;
+}

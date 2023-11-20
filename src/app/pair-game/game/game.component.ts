@@ -3,6 +3,7 @@ import { Cards } from 'src/app/models/Card';
 import { CardService } from 'src/app/shared/services/card.service';
 import { Player } from 'src/app/models/Player';
 import { PopupService } from 'src/app/shared/services/popup.service';
+import { GameRulesService } from 'src/app/shared/services/game-rules.service';
 
 //TODO faire des constructeurs plus beaux
 
@@ -12,10 +13,14 @@ import { PopupService } from 'src/app/shared/services/popup.service';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
+  gameRules: GameRulesService;
   constructor(
     private cardService: CardService,
-    public popupService: PopupService
-  ) {}
+    public popupService: PopupService,
+    gr: GameRulesService
+  ) {
+    this.gameRules = gr;
+  }
 
   isVisible: boolean = true;
   //------------ methodes/global logique --------------
@@ -32,11 +37,15 @@ export class GameComponent implements OnInit {
     this.popupService.openPopup();
   }
 
+  closeRules() {
+    this.gameRules.closeRules();
+  }
+
   //#region GAME LOGIC
   //------------ variables/declaration game --------------
   defaultName: string = 'empty';
 
-  userInput: string = '';
+  userInput!: string;
 
   goodToGo: boolean = false;
 
@@ -57,9 +66,13 @@ export class GameComponent implements OnInit {
 
   //------------ methodes/game logique --------------
   addNewPlayer(input: string): void {
-    let newPlayer = { name: input, score: 0 };
-    this.players.push(newPlayer);
-    this.updateName();
+    if (input.trim() != '') {
+      this.gameRules.addPlayer(input, this.players);
+      this.userInput = '';
+      this.updateName();
+    } else {
+      console.log('NOOOOOOOO');
+    }
   }
   sortScore(): void {
     this.sortedPlayers = this.players.slice().sort((a, b) => b.score - a.score);

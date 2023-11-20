@@ -1,0 +1,23 @@
+ul {
+  list-style: none;
+}
+
+.quiz {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.answer {
+  font-size: 1.4rem;
+}
+
+.lead {
+  font-size: 1.4rem;
+}
+.isCorrect {
+  background-color: #819a47;
+  border: 5px solid #5e1c25;
+  font-size: larger;
+}
