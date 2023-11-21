@@ -34,11 +34,15 @@
   <article class="speech-bubble">
     <h3>
       Tour du l'équipe : {{ updatePlayer()?.name ?? "default" | titlecase }}
+      <!--FR : name marqué nullable car le tableau est vide au lancement de la page-->
+      <!--EN : name marked as nullable since array is empty before game starts-->
     </h3>
   </article>
   <article class="speech-bubble">
     <p class="lead">
-      {{ currentQuestion.quiz.question }}
+      {{ currentQuestion?.quiz?.question }}
+      <!--FR : même raisonement que ci dessus-->
+      <!--EN : same reasoning as above-->
     </p>
     <ul class="quiz">
       <li *ngFor="let answer of shuffledAnswers">
@@ -60,7 +64,7 @@
     <button
       class="btn btn-danger"
       (click)="sortTeamsScore()"
-      [disabled]="startIndex != 20"
+      [disabled]="startIndex != 21"
     >
       tableau des scores
     </button>

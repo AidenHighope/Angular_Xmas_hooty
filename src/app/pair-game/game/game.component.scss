@@ -1,9 +1,7 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  //justify-content: space-evenly;
   gap: 10px;
-  margin: auto;
 }
 
 img {
@@ -25,4 +23,19 @@ img {
 
 h3 {
   text-align: center;
+}
+
+.gameboard {
+  align-items: center;
+  width: 1100px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.hooty {
+  width: 200px;
+  height: 200px;
 }

@@ -35,6 +35,7 @@ export class QuizGameComponent implements OnInit {
   teams: Player[] = [];
   sortedTeams: Player[] = [];
   urls: string[] = [
+    'https://quizzapi.jomoreschi.fr/api/v1/quiz/65329fcae4123c9a1476bbb2',
     'https://quizzapi.jomoreschi.fr/api/v1/quiz/65328678e4123c9a1476bb0e',
     'https://quizzapi.jomoreschi.fr/api/v1/quiz/642438e068d7ea9aa952784a',
     'https://quizzapi.jomoreschi.fr/api/v1/quiz/653280cfe4123c9a1476bab0',
