@@ -64,6 +64,11 @@ export class QuizGameComponent implements OnInit {
   clickCounter: number = 0;
   displayGame: boolean = false;
   isCorrect: boolean = false;
+  showSwitchTurnPopUp: boolean = false;
+
+  toggleSwitchTurnPopUp(): void {
+    this.showSwitchTurnPopUp = !this.showSwitchTurnPopUp;
+  }
 
   toggleGame(): void {
     this.displayGame = true;
@@ -101,7 +106,13 @@ export class QuizGameComponent implements OnInit {
       }
     }
 
+    console.log(this.updatePlayer().name + ' : ' + this.updatePlayer().score);
     this.toggleSwitchTurn();
+    this.showSwitchTurnPopUp = true;
+
+    setTimeout(() => {
+      this.showSwitchTurnPopUp = false;
+    }, 2000);
     if (this.clickCounter === 2) {
       this.toggleButton();
       this.clickCounter = 0;
@@ -144,6 +155,9 @@ export class QuizGameComponent implements OnInit {
 
   nextQuestion(): void {
     this.startIndex++;
+    if (this.startIndex > 21) {
+      this.startIndex = 21;
+    }
     this.getOne(this.startIndex);
     this.toggleButton();
     this.isCorrect = false;

@@ -9,6 +9,10 @@ ul {
   justify-content: space-evenly;
 }
 
+.btn-danger {
+  margin-left: 1%;
+}
+
 .answer {
   font-size: 1.4rem;
 }
@@ -20,4 +24,42 @@ ul {
   background-color: #819a47;
   border: 5px solid #5e1c25;
   font-size: larger;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.switchContent {
+  animation: fadeInOut 2.1s ease-in-out;
+  color: white;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-weight: bold;
+    font-size: 4rem;
+  }
+}
+.switch-turn-animation {
+  animation: fadeInOut 2s ease-in-out;
+}
+
+.hooty {
+  height: 400px;
 }

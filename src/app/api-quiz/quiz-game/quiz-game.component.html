@@ -1,8 +1,44 @@
 <section class="main-container" *ngIf="GameRules.gameRuleState$ | async">
   <article class="speech-bubble">
-    <p>insérer ici règles du jeux</p>
+    <div class="row">
+      <div class="col">
+        <p>
+          Aujourd'hui en cette magnifique soirée, nous allons jouer à Quiz-game
+          ! c'est bien la super série que les jeunes humains aiment ? donc je
+          vous ai préparé un petit quiz-game !<br />
+          voici les consignes de sécurité hoot-hoot
+        </p>
+        <ol>
+          <li>
+            Divisez-vous en deux équipes et trouvez des noms aussi fantastiques
+            que les étoiles qui brillent dans la nuit !
+          </li>
+          <li>
+            Il y a 21 questions qui vous attendent. Chaque question cache une
+            réponse parmi 4 options. Une seule est la clé pour ouvrir la porte
+            du savoir hou-hou !
+          </li>
+          <li>
+            Une réponse correcte et vous gagnez 15 précieux points pour votre
+            équipe, éclatant comme des joyaux dans la lueur de la lune. Mais
+            attention ! Une réponse erronée vous coûtera 5 points. Choisissez
+            vos réponses avec prudence, jeunes aventuriers
+          </li>
+          <li>Chaque équipe joue à son tour et choisi révèle son choix</li>
+          <li>
+            À chaque tour, la réponse correcte sera dévoilée tel un sortilège,
+            révélant le chemin de la vérité. Sentez-vous la magie dans l'air
+            alors que vous avancez dans votre quête vers la victoire ???
+          </li>
+        </ol>
+      </div>
+      <div class="col">
+        <img class="hooty" src="assets/emotes/quiz-game.png" />
+      </div>
+    </div>
+
     <hr />
-    <label for="field">Nommer 2 équipes</label>
+    <label for="field">Nommez 2 équipes</label>
     <input type="text" id="field" [(ngModel)]="userInput" />
     <button
       (click)="addTeam(userInput)"
@@ -20,7 +56,7 @@
     </button>
     <ul>
       <li *ngFor="let item of teams">
-        {{ item.name }}
+        {{ item.name | titlecase }}
       </li>
     </ul>
   </article>
@@ -32,8 +68,16 @@
   [class.show]="displayGame"
 >
   <article class="speech-bubble">
+    <div class="switchContent" *ngIf="showSwitchTurnPopUp">
+      <div class="switch-turn-animation">
+        <h1>
+          Au tour de l'équipe
+          {{ updatePlayer()?.name ?? "default" | titlecase }} !!
+        </h1>
+      </div>
+    </div>
     <h3>
-      Tour du l'équipe : {{ updatePlayer()?.name ?? "default" | titlecase }}
+      Tour de l'équipe : {{ updatePlayer()?.name ?? "default" | titlecase }}
       <!--FR : name marqué nullable car le tableau est vide au lancement de la page-->
       <!--EN : name marked as nullable since array is empty before game starts-->
     </h3>
@@ -58,13 +102,17 @@
         </button>
       </li>
     </ul>
-    <button class="btn btn-danger" (click)="nextQuestion()" [disabled]="!nextQ">
+    <button
+      class="btn btn-danger"
+      (click)="nextQuestion()"
+      [disabled]="!nextQ || startIndex === 21"
+    >
       next
     </button>
     <button
       class="btn btn-danger"
       (click)="sortTeamsScore()"
-      [disabled]="startIndex != 21"
+      [disabled]="!nextQ || startIndex != 21"
     >
       tableau des scores
     </button>
